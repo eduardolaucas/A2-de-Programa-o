@@ -90,7 +90,8 @@ def responder_pergunta(texto_pl, dados_pl, pergunta):
 --- Texto do PL ---
 {texto_pl}
 """
-        response = model.generate_content(prompt_pergunta)
+       
+    response = model.generate_content(prompt_pergunta)
     return response.text
 
 st.subheader("1. Identifique a Proposição")
