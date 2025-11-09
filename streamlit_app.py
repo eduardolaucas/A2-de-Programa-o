@@ -66,7 +66,8 @@ def gerar_resumo_executivo(texto_pl, dados_pl):
         f"Tipo: {dados_pl.get('siglaTipo')} - {dados_pl.get('numero')}/{dados_pl.get('ano')}\n"
         f"Ementa: {dados_pl.get('ementa')}"
     )
-        prompt_resumo = f"""Crie um resumo executivo de 2 a 3 parágrafos do Projeto de Lei (PL) a seguir, destacando o tema, o objetivo e as principais propostas.
+       
+    prompt_resumo = f"""Crie um resumo executivo de 2 a 3 parágrafos do Projeto de Lei (PL) a seguir, destacando o tema, o objetivo e as principais propostas.
 
 --- Ficha Técnica ---
 {ficha}
