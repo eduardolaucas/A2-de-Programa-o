@@ -1,7 +1,8 @@
+
 import streamlit as st
 import requests
 import os
-from google import genai
+import google.generativeai as genai 
 
 st.title("Assistente Interativo de Consulta Legislativa")
 st.caption("Foco em Projetos de Lei (PLs) Federais")
@@ -9,7 +10,7 @@ st.caption("Foco em Projetos de Lei (PLs) Federais")
 try:
     genai.configure(api_key=st.secrets["GEMINI_API_KEY"])
 except KeyError:
-    st.error("Erro: A chave 'GEMINI_API_KEY' não foi encontrada nos Secrets do Streamlit.")
+    st.error("Erro: A chave 'GEMINI_API_KEY' não foi encontrada nos Secrets do Streamlit. Verifique a Aula 11!")
     st.stop()
 
 MODEL_NAME = "gemini-1.5-flash" 
@@ -49,7 +50,6 @@ def buscar_pl(sigla, numero, ano):
         
         texto_pl = dados.get('urlInteiroTeor')
         if not texto_pl:
-
             texto_pl = dados.get('ementa', 'Texto integral não disponível.')
             st.warning("Texto integral (urlInteiroTeor) não disponível. Usando a Ementa para a análise.")
             
@@ -66,7 +66,7 @@ def gerar_resumo_executivo(texto_pl, dados_pl):
         f"Tipo: {dados_pl.get('siglaTipo')} - {dados_pl.get('numero')}/{dados_pl.get('ano')}\n"
         f"Ementa: {dados_pl.get('ementa')}"
     )
-       
+    
     prompt_resumo = f"""Crie um resumo executivo de 2 a 3 parágrafos do Projeto de Lei (PL) a seguir, destacando o tema, o objetivo e as principais propostas.
 
 --- Ficha Técnica ---
@@ -90,9 +90,10 @@ def responder_pergunta(texto_pl, dados_pl, pergunta):
 --- Texto do PL ---
 {texto_pl}
 """
-       
+    
     response = model.generate_content(prompt_pergunta)
     return response.text
+
 
 st.subheader("1. Identifique a Proposição")
 col1, col2, col3 = st.columns(3)
