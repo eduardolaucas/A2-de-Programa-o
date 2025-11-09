@@ -1,7 +1,7 @@
 import streamlit as st
 import requests
 import os
-import google.generativeai as genai 
+import google.generativeai as genai
 
 st.title("Assistente Interativo de Consulta Legislativa")
 st.caption("Foco em Projetos de Lei (PLs) Federais")
