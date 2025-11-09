@@ -44,26 +44,28 @@ def gerar_resumo_executivo(texto_pl, dados_pl):
         f"Ementa: {dados_pl.get('ementa')}"
     )
     
-    prompt_resumo = (
-        f"Você é um assistente legislativo. Crie um resumo executivo de **2 a 3 parágrafos** "
-        f"do Projeto de Lei (PL) a seguir, destacando o tema, o objetivo e as principais propostas.\n\n"
-        f"--- Ficha Técnica ---\n{ficha}\n\n"
-        f"--- Texto do PL ---\n{texto_pl}"
-    )
+    prompt_resumo = f"""Crie um resumo executivo de 2 a 3 parágrafos do Projeto de Lei (PL) a seguir, destacando o tema, o objetivo e as principais propostas.
 
+--- Ficha Técnica ---
+{ficha}
+
+--- Texto do PL ---
+{texto_pl}
+"""
     response = client.generate_content(MODEL_NAME, prompt_resumo)
     return response.text
 
 def responder_pergunta(texto_pl, dados_pl, pergunta):
     """Responde a uma pergunta específica do usuário."""
     
-    prompt_pergunta = (
-        f"Você é um assistente legislativo. Responda diretamente e de forma contextualizada "
-        f"à pergunta do usuário, utilizando APENAS o texto do Projeto de Lei fornecido. "
-        f"Se a informação não estiver no texto, diga que não pode responder com base nele.\n\n"
-        ff"--- Pergunta ---\n{pergunta}\n\n"
-        f"--- Texto do PL ---\n{texto_pl}"
-    )
+    prompt_pergunta = f"""Responda diretamente e de forma contextualizada à pergunta do usuário, utilizando APENAS o texto do Projeto de Lei fornecido. Se a informação não estiver no texto, diga que não pode responder com base nele.
+
+--- Pergunta ---
+{pergunta}
+
+--- Texto do PL ---
+{texto_pl}
+"""
     
     response = client.generate_content(MODEL_NAME, prompt_pergunta)
     return response.text
