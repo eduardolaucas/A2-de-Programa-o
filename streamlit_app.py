@@ -13,7 +13,7 @@ except KeyError:
     st.error("Erro: A chave 'GEMINI_API_KEY' não foi encontrada nos Secrets do Streamlit. Verifique a Aula 11!")
     st.stop()
 
-MODEL_NAME = "gemini-1.0-pro"
+MODEL_NAME = "gemini-1.5-flash"
 model = genai.GenerativeModel(MODEL_NAME)
 
 CAMARA_API_URL = "https://dadosabertos.camara.leg.br/api/v2"
